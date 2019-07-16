@@ -50,7 +50,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    replay_test = '聽不懂R'
+    reply_test = '聽不懂R'
     if msg == 'Hi':
         reply_test = 'Yo'
     elif msg == '你好':
