@@ -49,14 +49,14 @@ def callback():
 #以下處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = event.message.text
-    if text == 'Hi':
+    msg = event.message.text
+    if msg == 'Hi':
         reply_test == 'Yo'
-    elif text == '你好':
+    elif msg == '你好':
         reply_test == '哩賀'
     else:
-        reply_test == test
-        
+        reply_test == msg
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(reply_text))
