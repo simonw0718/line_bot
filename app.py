@@ -63,10 +63,10 @@ def handle_message(event):
         TextSendMessage(reply_text))
     line_bot_api.reply_message(
         event.reply_token,
-        sticker_message = StickerSendMessage(
+        StickerSendMessage(
         package_id='1',
         sticker_id='1'
-    ))
+))
     
 
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
