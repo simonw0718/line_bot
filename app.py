@@ -56,6 +56,13 @@ def handle_message(event):
         package_id='1',
         sticker_id='1'
     )
+
+    if '給我貼圖' in msg:
+        line_bot_api.reply_message(
+        event.reply_token,sticker)
+    return
+
+
     if msg in ['Hi', 'hi']:
         reply_text = 'Yo'
     elif msg in ['你好','哩賀']:
@@ -70,8 +77,6 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(reply_text))
-    line_bot_api.reply_message(
-        event.reply_token,sticker)
     
 
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
