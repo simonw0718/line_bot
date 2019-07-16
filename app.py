@@ -13,7 +13,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,StickerSendMessage
+    MessageEvent, TextMessage, TextSendMessage, 
+    StickerSendMessage
 )
 
 app = Flask(__name__)
@@ -51,22 +52,26 @@ def callback():
 def handle_message(event):
     msg = event.message.text
     reply_text = '聽不懂R'
+    sticker = StickerSendMessage(
+        package_id='1',
+        sticker_id='1'
+    )
     if msg in ['Hi', 'hi']:
         reply_text = 'Yo'
     elif msg in ['你好','哩賀']:
         reply_text = '哩賀'
     else:
         reply_text = '聽不懂R'
+        sticker = StickerSendMessage(
+        package_id='1',
+        sticker_id='2'
+    )
 
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(reply_text))
     line_bot_api.reply_message(
-        event.reply_token,
-        StickerSendMessage(
-        package_id='1',
-        sticker_id='1'
-))
+        event.reply_token,sticker)
     
 
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
