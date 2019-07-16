@@ -66,10 +66,8 @@ def handle_message(event):
         sticker_id='2')
         line_bot_api.reply_message(
         event.reply_token,sticker)
-    return
 
-
-    if msg in ['Hi', 'hi']:
+    elif msg in ['Hi', 'hi']:
         reply_text = 'Yo'
     elif msg in ['你好','哩賀']:
         reply_text = '哩賀'
