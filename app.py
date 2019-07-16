@@ -57,6 +57,17 @@ def handle_message(event):
         sticker_id='1'
     )
 
+    if '給我貼圖' in msg:
+        line_bot_api.reply_message(
+        event.reply_token,sticker)
+    elif '換一張貼圖' in msg:
+        sticker = StickerSendMessage(
+        package_id='1',
+        sticker_id='2')
+        line_bot_api.reply_message(
+        event.reply_token,sticker)
+    return
+
 
     if msg in ['Hi', 'hi']:
         reply_text = 'Yo'
@@ -66,14 +77,12 @@ def handle_message(event):
         reply_text = '聽不懂R'
         sticker = StickerSendMessage(
         package_id='1',
-        sticker_id='2'
-    )
+        sticker_id='2')
 
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(reply_text))
-    line_bot_api.reply_message(
-        event.reply_token,sticker)
+    
 
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
 #避免import app.py的時候就開始跑
