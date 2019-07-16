@@ -50,13 +50,13 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    reply_test = '聽不懂R'
+    reply_text = '聽不懂R'
     if msg == 'Hi':
-        reply_test = 'Yo'
+        reply_text = 'Yo'
     elif msg == '你好':
-        reply_test = '哩賀'
+        reply_text = '哩賀'
     else:
-        reply_test = msg
+        reply_text = msg
 
     line_bot_api.reply_message(
         event.reply_token,
