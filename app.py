@@ -51,16 +51,23 @@ def callback():
 def handle_message(event):
     msg = event.message.text
     reply_text = '聽不懂R'
-    if msg == 'Hi':
+    if msg in ['Hi', 'hi']:
         reply_text = 'Yo'
-    elif msg == '你好':
+    elif msg in ['你好','哩賀']:
         reply_text = '哩賀'
     else:
-        reply_text = msg
+        reply_text = '聽不懂R'
 
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(reply_text))
+    line_bot_api.reply_message(
+        event.reply_token,
+        sticker_message = StickerSendMessage(
+        package_id='1',
+        sticker_id='1'
+    ))
+    
 
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
 #避免import app.py的時候就開始跑
