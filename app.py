@@ -46,11 +46,20 @@ def callback():
 #觸發完callback之後再觸發handle_message
 #這種完整訊息通常都不用改
 
+#以下處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    text = event.message.text
+    if text == 'Hi':
+        reply_test == 'Yo'
+    elif text == '你好':
+        reply_test == '哩賀'
+    else:
+        reply_test == test
+        
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='okk'))
+        TextSendMessage(reply_text))
 
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
 #避免import app.py的時候就開始跑
