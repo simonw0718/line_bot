@@ -80,8 +80,12 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(reply_text))
-    
+    line_bot_api.reply_message(
+        event.reply_token,sticker)
 
+    
+#一條一條寫在裡面叫做rule based, 人工智慧通常不是
+#Ai NLP natural language processing
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
 #避免import app.py的時候就開始跑
 if __name__ == "__main__": 
