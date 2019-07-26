@@ -79,9 +79,8 @@ def handle_message(event):
 
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(reply_text))
-    line_bot_api.reply_message(
-        event.reply_token,sticker)
+        [TextSendMessage(reply_text), sticker])
+   
 
     
 #一條一條寫在裡面叫做rule based, 人工智慧通常不是
