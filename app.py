@@ -34,7 +34,6 @@ token_url = 'https://api.line.me/oauth2/v2.1/token'
 
 app = Flask(__name__)
 
-#
 app.config['SECRET_KEY'] = 'thesesecretkey'
 
 
@@ -50,7 +49,6 @@ def get_redirect_url():
 #external = trun才是public的
 #因為可以產生http or https
 #上面fun會回傳oauth callback 路徑
-#11
 
 @app.route("/login")
 def login():
