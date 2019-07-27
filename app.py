@@ -18,7 +18,7 @@ from linebot.models import (
 )
 
 ## Oauth code 上半部 
-from      import OAuth2Session
+from requests_oauthlib import OAuth2Session
 
 from flask import Flask, request, redirect, session, url_for
 from flask.json import jsonify
