@@ -45,8 +45,10 @@ app.config['SECRET_KEY'] = 'thesesecretkey'
 
 def get_redirect_url():
     return url_for('.oauth_callback',
-                   _external = True,  #external = trun才是public的
-                   _scheme = 'https') #因為可以產生http or https
+                   _external = True,  
+                   _scheme = 'https')
+#external = trun才是public的
+#因為可以產生http or https
 #上面fun會回傳oauth callback 路徑
 #11
 
