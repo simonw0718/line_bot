@@ -19,7 +19,6 @@ from linebot.models import (
 
 ## Oauth code 上半部 
 from requests_oauthlib import OAuth2Session
-    
 from flask import Flask, request, redirect, session, url_for
 from flask.json import jsonify
 
@@ -45,7 +44,7 @@ app.config['SECRET_KEY'] = 'thesesecretkey'
 #需要response_type, client_id, redirect_url(=callback路徑), state, scope(取得使用者那些資料,需取得profile & openid)
 
 def get_redirect_url():
-    return url_for('.oath_callback',
+    return url_for('.oauth_callback',
                    _external = True,  #external = trun才是public的
                    _scheme = 'https') #因為可以產生http or https
 #上面fun會回傳oauth callback 路徑
