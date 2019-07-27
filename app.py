@@ -17,7 +17,59 @@ from linebot.models import (
     StickerSendMessage
 )
 
+## Oauth code 上半部 
+from requests_oauthlib import OAuth2Session
+
+from flask import Flask, request, redirect, session, url_for
+from flask.json import jsonify
+
+# This information is obtained upon registration of a new GitHub
+client_id = "1603016408"
+client_secret = "0eb3f0d6e46b6429ad25884023728c04"
+#domument中的url
+authorization_base_url = 'https://access.line.me/oauth2/v2.1/authorize'
+token_url = 'https://api.line.me/oauth2/v2.1/token'
+#逐一修改
+## Oauth code 上半部 
+
+
 app = Flask(__name__)
+
+## Oauth code 下半部##
+
+#建立login的連結
+#需要response_type, client_id, redirect_url(=callback路徑), state, scope(取得使用者那些資料,需取得profile & openid)
+
+def get_redirect_url():
+    return url_for('.oath_callback',
+                   _external = True,  #external = trun才是public的
+                   _scheme = 'https') #因為可以產生http or https
+#上面fun會回傳oauth callback 路徑
+
+
+@app.route("/login")
+def login():
+    line_login = OAuth2Session(client_id, response_type = 'code',
+                               redirect_url = get_redirect_url(),
+                               scope = 'profile openid')
+
+    authorization_url, state = github.authorization_url(authorization_base_url)
+
+    # State is used to prevent CSRF, keep this for later.
+    session['oauth_state'] = state
+    return redirect(authorization_url)
+
+#state ->字串, 防攻擊
+
+@app.route("/oauth_callback")
+def oauth_callback():
+    github = OAuth2Session(client_id, state=session['oauth_state'])
+    token = github.fetch_token(token_url, client_secret=client_secret,
+                               authorization_response=request.url)
+
+    return jsonify(github.get('https://api.github.com/user').json())
+## Oauth code 下半部##
+
 
 #存取權限來跟line互動
 line_bot_api = LineBotApi('vky70sNW0Z/J63o1GXjWHFAhU+9BKDeVlK4jOAtxUNtt5c9FfzRL+L4KG3ifrGsGALCWs8vxhigu6fYESrE9aMEp1qajrMdzHy1GfQIIDANmOieYEdFK4vKaBQM0PV1i3zGJFJX3TwknOhvahOv0qwdB04t89/1O/w1cDnyilFU=')
@@ -76,6 +128,8 @@ def handle_message(event):
         sticker = StickerSendMessage(
         package_id='1',
         sticker_id='2')
+
+#line 一次只能回傳一個訊息，所以如果要兩個都貼要用list!!!!
 
     line_bot_api.reply_message(
         event.reply_token,
