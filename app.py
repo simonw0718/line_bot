@@ -35,6 +35,10 @@ token_url = 'https://api.line.me/oauth2/v2.1/token'
 
 app = Flask(__name__)
 
+#
+app.config['SECRET_KEY'] = 'thesesecretkey'
+
+
 ## Oauth code 下半部##
 
 #建立login的連結
@@ -49,7 +53,7 @@ def get_redirect_url():
 
 @app.route("/login")
 def login():
-    line_login = OAuth2Session(client_id, response_type = 'code',
+    line_login = OAuth2Session(client_id,
                                redirect_url = get_redirect_url(),
                                scope = 'profile openid')
 
