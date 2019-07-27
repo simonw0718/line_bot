@@ -1,3 +1,5 @@
 flask
 gunicorn
 line-bot-sdk
+requests_oauthlib
+flask.json
