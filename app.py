@@ -18,7 +18,7 @@ from linebot.models import (
 )
 
 ## Oauth code 上半部 
-from requests_oauthlib import OAuth2Session
+from      import OAuth2Session
 
 from flask import Flask, request, redirect, session, url_for
 from flask.json import jsonify
@@ -146,4 +146,4 @@ def handle_message(event):
 #通常會把code寫成main function，寫下面這行是希望直接讀取才執行
 #避免import app.py的時候就開始跑
 if __name__ == "__main__": 
-    app.run()
+    app.run(debug = True)
